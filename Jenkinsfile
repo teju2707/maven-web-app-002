@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean deploy -Djacoco.skip=true'
+                sh 'mvn clean install -Djacoco.skip=true'
             }
         }
     }
