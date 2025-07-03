@@ -1,25 +1,21 @@
-pipeline {  
-
+pipeline {
     agent {
-
-        node{
+        node {
             label 'MAVEN'
-            customWorkspace '/var/jenkins_home/workspace/maven-web-app'
         }
     }
-        
-    tools{
-        maven "Maven-3.9.2"
+    environment {
+        PATH = "/opt/maven/bin:$PATH"
     }
     stages {
         stage('Clone') {
             steps {
-               git 'https://github.com/teju2707/maven-web-app-002.git'
+                git 'https://github.com/teju2707/maven-web-app-002.git'
             }
         }
         stage('Build') {
             steps {
-               sh 'mvn clean package'
+                sh 'mvn clean deploy -Djacoco.skip=true'
             }
         }
     }
